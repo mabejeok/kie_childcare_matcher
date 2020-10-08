@@ -169,7 +169,7 @@ public class Childcare {
 	}
 	
 	public void computeDistance(String parentAddress, String parentDistance, String postalList) throws URISyntaxException, IOException, ParseException {
-		String googleApiKey = "AIzaSyC-RKwFKudeyJ8hKmg-GE_MdmnxHlpx8OU"; // Your Google API key
+		String googleApiKey = ""; // Your Google API key
 		String[] postalStrings = postalList.split(", ");
 
 		try {
