@@ -1,0 +1,227 @@
+package rules
+	
+import com.ccrecommend.model.Parent
+import com.ccrecommend.model.Service
+import com.ccrecommend.model.Childcare
+import com.ccrecommend.model.ChildcareCollection
+import com.ccrecommend.model.ServiceCollection
+
+rule "Filter Service Rule 1" 
+	when
+		parent : Parent()
+		svc : Service( studyLevel != parent.studyLevel || typeOfCitizenship != parent.typeOfCitizenship )
+	then
+		System.out.println("Fired Filter Service Rule 1"); 
+		retract( svc );
+end
+ 
+rule "Filter Service sessions 1"
+	when
+		parent : Parent( service matches "Session 1")
+		svc : Service( typeOfService not in ("Session 1", "FEP AM", "Extended Session 1", "Flexi Care 1 AM", "Half Day AM"))
+	then
+		System.out.println("Fired Filter Service sessions 1");
+		retract( svc );
+end
+ 
+rule "Filter Service sessions 2"
+	when
+		parent : Parent( service matches "Session 2")
+		svc : Service( typeOfService not in ("Session 2", "FEP PM", "Extended Session 2", "Flexi Care 1 PM", "Half Day PM"))
+	then
+		System.out.println("Fired Filter Service sessions 2");
+		retract( svc );
+end
+
+rule "Filter Service sessions 3"
+	when
+		parent : Parent( service matches "Full Day")
+		svc : Service( typeOfService not matches parent.service)
+	then
+		System.out.println("Fired Filter Service sessions 3");
+		retract( svc );
+end
+
+rule "Filter Service Rule 2" 
+	when
+		svc : Service( )
+		parent : Parent( feeRange not in (svc.feeRange, "Any"))
+	then
+		System.out.println("Fired Filter Service Rule 2");
+		retract( svc );		
+end
+
+rule "Filter Service Rule 3"
+	    salience -50
+	when
+		svc: Service()
+		parent: Parent()
+	then
+        System.out.println("Fired Filter Service Rule 3");
+        parent.addService( svc );
+end
+
+rule "Filter Service Rule 4"
+	    salience -50
+	when
+		svc: Service()
+		parent: Parent()
+	then
+        System.out.println("Fired Filter Service Rule 4");
+        parent.addOtherService( svc );
+end
+
+rule "Row 1 Filter CC vacancy DT"
+	when
+		p1 : Parent( studyLevel matches "Infant" )
+		cc1 : Childcare( infantVacancy matches "na" )
+	then
+		System.out.println("Fired Row 1 Filter CC vacancy DT");
+		retract( cc1 );
+end
+
+rule "Row 2 Filter CC vacancy DT"
+	when
+		p2 : Parent( studyLevel matches "Playgroup" )
+		cc2 : Childcare( pgVacancy matches "na" )
+	then
+		System.out.println("Fired Row 2 Filter CC vacancy DT");
+		retract( cc2 );
+end
+
+rule "Row 3 Filter CC vacancy DT"
+	when
+		p3 : Parent( studyLevel matches "Pre-nursery" )
+		cc3 : Childcare( n1Vacancy matches "na" )
+	then
+		System.out.println("Fired Row 3 Filter CC vacancy DT");
+		retract( cc3 );
+end
+
+rule "Row 4 Filter CC vacancy DT"
+	when
+		p4 : Parent( studyLevel matches "Nursery" )
+		cc4 : Childcare( n2Vacancy matches "na" )
+	then
+		System.out.println("Fired Row 4 Filter CC vacancy DT");
+		retract( cc4 );
+end
+
+rule "Row 5 Filter CC vacancy DT"
+	when
+		p5 : Parent( studyLevel matches "Kindergarten 1" )
+		cc5 : Childcare( k1Vacancy matches "na" )
+	then
+		System.out.println("Fired Row 5 Filter CC vacancy DT");
+		retract( cc5 );
+end
+
+rule "Row 6 Filter CC vacancy DT"
+	when
+		p6 : Parent( studyLevel matches "Kindergarten 2" )
+		cc6 : Childcare( k2Vacancy matches "na" )
+	then
+		System.out.println("Fired Row 6 Filter CC vacancy DT");
+		retract( cc6 );
+end
+
+rule "Row 1 Filter CC Language DT"
+	when
+		pChinese : Parent( language matches "Chinese" )
+		ccNotChinese : Childcare( secondLanguage not in ( "Chinese", "Chinese|Malay", "Chinese|Malay|Tamil", "Chinese|Others: German", "Chinese|Tamil" ) )
+	then
+		System.out.println("Fired Row 1 Filter CC Language DT");
+		retract( ccNotChinese );
+end
+
+rule "Row 2 Filter CC Language DT"
+	when
+		pMalay : Parent( language matches "Malay" )
+		ccNotMalay : Childcare( secondLanguage not in ( "Chinese|Malay", "Chinese|Malay|Tamil", "Malay", "Malay|Others: Arabic", "Malay|Others: Arabic Language", "Malay|Others: Basic Arabic" ) )
+	then
+		System.out.println("Fired Row 2 Filter CC Language DT");
+		retract( ccNotMalay );
+end
+
+rule "Row 3 Filter CC Language DT"
+	when
+		pTamil : Parent( language matches "Tamil" )
+		ccNotTamil : Childcare( secondLanguage not in ( "Chinese|Malay|Tamil", "Chinese|Tamil" ))
+	then
+		System.out.println("Fired Row 3 Filter CC Language DT");
+		retract( ccNotTamil );
+end
+
+rule "Row 1 Filter CC Food DT"
+	when
+		pHalal : Parent( dietaryRestrictions matches "Halal" )
+		ccNotHalal : Childcare( food not in ( "No Pork No Lard with No Beef (without Certification from MUIS but from Halal Sources)", "No Pork No Lard with No Beef (from Non-Halal Sources)", "Halal Food With Beef (with Certification from MUIS)", "Halal Food With No Beef (with Certification from MUIS)", "No Pork No Lard with Beef (without Certification from MUIS but from Halal Sources)", "No Pork No Lard with Beef (from Non-Halal Sources" ) )
+	then
+		System.out.println("Fired Row 1 Filter CC Food DT");
+		retract( ccNotHalal );
+end
+
+rule "Row 2 Filter CC Food DT"
+	when
+		pVeg : Parent( dietaryRestrictions matches "Vegetarian" )
+		ccNotVeg : Childcare( food not matches pVeg.dietaryRestrictions )
+	then
+		System.out.println("Fired Row 2 Filter CC Food DT");
+		retract( ccNotVeg );
+end
+
+rule "Row 3 Filter CC Food DT"
+	when
+		pNonbeef : Parent( dietaryRestrictions matches "Non-beef" )
+		ccNotNonbeef : Childcare( food not in ( "Halal Food With Beef (with Certification from MUIS)", "na", "Others", "No Pork No Lard with Beef (without Certification from MUIS but from Halal Sources)", "No Pork No Lard with Beef (from Non-Halal Sources" ) )
+	then
+		System.out.println("Fired Row 3 Filter CC Food DT");
+		retract( ccNotNonbeef );
+end
+
+rule "Filter distance < 1km"
+	when
+		parent : Parent( distance matches "< 1km")
+		cc : Childcare( distance > 1 || distance < 0)
+	then
+		System.out.println("Filter distance < 1km");
+		retract( cc );
+end
+
+rule "Filter distance < 2km"
+	when
+		parent : Parent( distance matches "< 2km")
+		cc: Childcare(distance > 2 || distance < 0)
+	then
+		System.out.println("Filter distance < 2km");
+		retract( cc );
+end
+
+rule "Filter distance < 3km"
+	when
+		parent : Parent( distance matches "< 3km")
+		cc : Childcare( distance > 3 || distance < 0)
+	then
+		System.out.println("Filter distance < 3km");
+		retract( cc );
+end
+
+rule "Add cc" 
+	    salience -50
+	when
+		cc : Childcare( )
+		parent : Parent()
+	then
+		System.out.println("Add cc");
+		parent.addChildcare( cc );
+end
+
+rule "Add other cc" 
+	    salience -50
+	when
+		cc : Childcare( )
+		parent : Parent()
+	then
+		System.out.println("Add other cc");
+		parent.addOtherChildcare( cc );
+end
