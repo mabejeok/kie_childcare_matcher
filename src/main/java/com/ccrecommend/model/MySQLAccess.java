@@ -50,7 +50,7 @@ public class MySQLAccess {
             // Setup the connection with the DB
             connect = DriverManager
                     .getConnection("jdbc:mysql://localhost/cc_schema?"
-                            + "useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&user=root&password=MyNewPass");
+                            + "useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&user=iss-user&password=iss-user");
 
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
@@ -74,7 +74,7 @@ public class MySQLAccess {
             // Setup the connection with the DB
             connect = DriverManager
                     .getConnection("jdbc:mysql://localhost/cc_schema?"
-                            + "useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&user=root&password=MyNewPass");
+                            + "useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&user=iss-user&password=iss-user");
 
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
