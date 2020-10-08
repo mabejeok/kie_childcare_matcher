@@ -36,51 +36,6 @@ public class ServiceCollection {
 		this.serviceList = serviceList;
 	}
 	
-	//Populate the service list from csv
-//	public void populateServices(){
-//        //Load services from CSV
-//      	    
-//		Path pathToFile = Paths.get("C:\\Users\\mavec\\Desktop\\MTech\\IRS_PM\\listing-of-centre-services.csv");
-//		BufferedReader br = null;
-//		
-//		try {
-//			br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII);	
-//		} catch(IOException ioe){
-//			ioe.printStackTrace(); 
-//		}
-//		
-//	    try
-//        { 
-//     		String line; 
-//	    	int j = 0;
-//     	 	 while ((line = br.readLine()) != null) {
-//     	 	    String[] attributes = line.split(";");
-//
-//	      	    if(j == 0) {
-//    		    	j++;
-//    		    	continue;
-//    		    }
-//      		    
-//      		    Service service = createService(attributes);
-//      			getServiceList().add(service) ;
-//      	        
-//      	        }
-//        } catch (IOException ioe) {
-//        	ioe.printStackTrace(); 
-//  	   	}
-//	    finally {
-//            if (br!=null) {
-//            	try {
-//            		br.close();
-//            	} catch (IOException ioe) {
-//                	ioe.printStackTrace(); 
-//          	   	}
-//            	 
-//            }
-//        }
-//        
-//	}
-	
 	public void populateServices() throws Exception {
 		MySQLAccess dao = new MySQLAccess();
         java.util.List<Map<String, String>> serviceList = dao.readServices();
