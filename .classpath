@@ -34,7 +34,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/mavec/Downloads/java-json.jar/java-json.jar"/>
-	<classpathentry kind="lib" path="C:/Users/mavec/Downloads/mysql-connector-java-8.0.21/mysql-connector-java-8.0.21/mysql-connector-java-8.0.21.jar"/>
+	<classpathentry kind="lib" path="/kie_childcare_matcher-master/src/main/resources/java-json.jar/java-json.jar"/>
+	<classpathentry kind="lib" path="/kie_childcare_matcher-master/src/main/resources/mysql-connector-java-8.0.21/mysql-connector-java-8.0.21.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
